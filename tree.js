@@ -1,5 +1,4 @@
 import { Node } from "./node.js";
-import { prettyPrint } from "./utilities.js";
 
 class Tree {
   constructor(array) {
@@ -16,6 +15,24 @@ class Tree {
       root.right = this.insert(root.right, value);
     }
     return root;
+  }
+  deleteItem(value) {
+    let previous;
+    let current = this.root;
+    while (current) {
+      if (current.data == value) break;
+      if (value > current.data) {
+        previous = current;
+        current = current.right;
+      } else if (value < current.data){
+        previous = current;
+        current = current.left
+      }
+    }
+
+    console.log('Node to delete' , current);
+    console.log('Previous Node' , previous);
+    
   }
 
   buildTree(array) {
@@ -34,13 +51,34 @@ class Tree {
 
     return sortedArrayToBSTRecur(uniqueArray, 0, uniqueArray.length - 1);
   }
+  printTree = () => this.prettyPrint(this.root);
+
+  prettyPrint(node, prefix = "", isLeft = true) {
+    if (node === null) {
+      return;
+    }
+    if (node.right !== null) {
+      this.prettyPrint(
+        node.right,
+        `${prefix}${isLeft ? "│   " : "    "}`,
+        false
+      );
+    }
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+    if (node.left !== null) {
+      this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+    }
+  }
 }
 
 const myTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 
 const otherTree = new Tree([1, 2, 3, 4]);
 
-prettyPrint(otherTree.root);
 otherTree.insert(otherTree.root, 13);
-otherTree.insert(otherTree.root, 13);
-prettyPrint(otherTree.root);
+otherTree.insert(otherTree.root, 0);
+otherTree.insert(otherTree.root, 59);
+
+// otherTree.printTree();
+myTree.printTree();
+myTree.deleteItem(9);

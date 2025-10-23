@@ -4,4 +4,13 @@ export class Node {
     this.left = left;
     this.right = right;
   }
+  hasBothChildren() {
+    return this.left && this.right;
+  }
+  hasOnlyOneChild() {
+    return this.left || this.right;
+  }
+  isAleafNode() {
+    return !this.left && !this.right;
+  }
 }

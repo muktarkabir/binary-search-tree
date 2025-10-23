@@ -24,18 +24,26 @@ class Tree {
       if (value > current.data) {
         previous = current;
         current = current.right;
-      } else if (value < current.data){
+      } else if (value < current.data) {
         previous = current;
-        current = current.left
+        current = current.left;
       }
     }
 
-    console.log('Node to delete' , current);
-    console.log('Previous Node' , previous);
-    if (!current.left && !current.right) {
+    console.log("Node to delete", current);
+    console.log("Previous Node", previous);
+    if (!previous) this.root = null;
+    if (current.isAleafNode()) {
       current = null;
+    } else if (current.hasOnlyOneChild()) {
+        let temp = current.left ?? current.right;
+        if (current.data < previous.data) {
+          previous.left = temp;
+        } else {
+          previous.right = temp;
+        }
+    } else if (current.hasBothChildren()) {
     }
-    
   }
 
   buildTree(array) {
@@ -85,3 +93,4 @@ otherTree.insert(otherTree.root, 59);
 // otherTree.printTree();
 myTree.printTree();
 myTree.deleteItem(9);
+myTree.printTree();

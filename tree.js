@@ -32,6 +32,9 @@ class Tree {
 
     console.log('Node to delete' , current);
     console.log('Previous Node' , previous);
+    if (!current.left && !current.right) {
+      current = null;
+    }
     
   }
 

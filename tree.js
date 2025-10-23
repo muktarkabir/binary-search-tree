@@ -34,7 +34,7 @@ class Tree {
     console.log("Previous Node", previous);
     if (!previous) this.root = null;
     if (current.isAleafNode()) {
-      current = null;
+      current.data > previous.data ? previous.right = null : previous.left = null;
     } else if (current.hasOnlyOneChild()) {
         let temp = current.left ?? current.right;
         if (current.data < previous.data) {
@@ -92,5 +92,5 @@ otherTree.insert(otherTree.root, 59);
 
 // otherTree.printTree();
 myTree.printTree();
-myTree.deleteItem(9);
+myTree.deleteItem(7);
 myTree.printTree();

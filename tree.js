@@ -1,3 +1,6 @@
+import { Node } from "./node.js";
+import { prettyPrint } from "./utilities.js";
+
 class Tree {
   constructor(array) {
     this.array = array;
@@ -19,5 +22,9 @@ function buildTree(array) {
     return root;
   };
 
-  return sortedArrayToBSTRecur(uniqueArray);
+  return sortedArrayToBSTRecur(uniqueArray,0,uniqueArray.length - 1);
 }
+
+const myTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+
+prettyPrint(myTree.root);

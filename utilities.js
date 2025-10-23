@@ -1,4 +1,4 @@
-const prettyPrint = (node, prefix = '', isLeft = true) => {
+export const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {
     return;
   }

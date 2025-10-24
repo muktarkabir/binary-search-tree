@@ -17,7 +17,7 @@ class Tree {
     return root;
   }
   deleteItem(value) {
-    let previous;
+    let previous = null;
     let targetNode = this.root;
     while (targetNode) {
       if (targetNode.data == value) break;
@@ -29,22 +29,30 @@ class Tree {
         targetNode = targetNode.left;
       }
     }
-
-    // console.log("Node to delete", targetNode);
-    // console.log("Previous Node", previous);
-    // if (!previous) this.root = null;
+    if (!targetNode) return null;
+    const isRoot = previous === null;
     if (targetNode.isAleafNode()) {
-      targetNode.data > previous.data
-        ? (previous.right = null)
-        : (previous.left = null);
+      if (isRoot) this.root = null;
+      else if (targetNode.data > previous.data) previous.right = null;
+      else previous.left = null;
     } else if (targetNode.hasOnlyOneChild()) {
-      let temp = targetNode.left ?? targetNode.right;
-      targetNode.data < previous.data
-        ? (previous.left = temp)
-        : (previous.right = temp);
+      let child = targetNode.left ?? targetNode.right;
+      if (isRoot) this.root = child;
+      else if (targetNode.data < previous.data) previous.left = child;
+      else previous.right = child;
     } else if (targetNode.hasBothChildren()) {
-     console.log("Need some extra work");
-     
+      let successorParent = targetNode;
+      let successor = targetNode.right;
+      while (successor.left != null) {
+        successorParent = successor;
+        successor = successor.left;
+      }
+      targetNode.data = successor.data;
+      if (successorParent.left === successor) {
+        successorParent.left = successor.right;
+      } else {
+        successorParent.right = successor.right;
+      }
     }
   }
 

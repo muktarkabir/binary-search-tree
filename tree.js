@@ -18,31 +18,33 @@ class Tree {
   }
   deleteItem(value) {
     let previous;
-    let current = this.root;
-    while (current) {
-      if (current.data == value) break;
-      if (value > current.data) {
-        previous = current;
-        current = current.right;
-      } else if (value < current.data) {
-        previous = current;
-        current = current.left;
+    let targetNode = this.root;
+    while (targetNode) {
+      if (targetNode.data == value) break;
+      if (value > targetNode.data) {
+        previous = targetNode;
+        targetNode = targetNode.right;
+      } else if (value < targetNode.data) {
+        previous = targetNode;
+        targetNode = targetNode.left;
       }
     }
 
-    console.log("Node to delete", current);
-    console.log("Previous Node", previous);
-    if (!previous) this.root = null;
-    if (current.isAleafNode()) {
-      current.data > previous.data ? previous.right = null : previous.left = null;
-    } else if (current.hasOnlyOneChild()) {
-        let temp = current.left ?? current.right;
-        if (current.data < previous.data) {
-          previous.left = temp;
-        } else {
-          previous.right = temp;
-        }
-    } else if (current.hasBothChildren()) {
+    // console.log("Node to delete", targetNode);
+    // console.log("Previous Node", previous);
+    // if (!previous) this.root = null;
+    if (targetNode.isAleafNode()) {
+      targetNode.data > previous.data
+        ? (previous.right = null)
+        : (previous.left = null);
+    } else if (targetNode.hasOnlyOneChild()) {
+      let temp = targetNode.left ?? targetNode.right;
+      targetNode.data < previous.data
+        ? (previous.left = temp)
+        : (previous.right = temp);
+    } else if (targetNode.hasBothChildren()) {
+     console.log("Need some extra work");
+     
     }
   }
 
@@ -91,6 +93,12 @@ otherTree.insert(otherTree.root, 0);
 otherTree.insert(otherTree.root, 59);
 
 // otherTree.printTree();
+// myTree.printTree();
+// myTree.deleteItem(9);
+// myTree.deleteItem(4);
+// myTree.deleteItem(8);
 myTree.printTree();
-myTree.deleteItem(7);
+myTree.deleteItem(67);
+myTree.printTree();
+myTree.deleteItem(8);
 myTree.printTree();

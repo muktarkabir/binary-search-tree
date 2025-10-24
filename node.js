@@ -8,7 +8,11 @@ export class Node {
     return this.left && this.right;
   }
   hasOnlyOneChild() {
-    return this.left || this.right;
+    if ((this.left != null && this.right == null) || (this.left == null && this.right != null)) {
+        return true;
+    } else {
+      return false;
+    }
   }
   isAleafNode() {
     return !this.left && !this.right;

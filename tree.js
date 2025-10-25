@@ -74,18 +74,24 @@ class Tree {
     if (!callback) throw new Error("Provide Callback function");
     if (typeof callback !== "function")
       throw new Error("Callback must be a function");
-    let current = this.root;
-    if (!current) return null;
-    let queue = [];
-    queue.push(current);
+    if (!this.root) return null;
+    const queue = [this.root];
     while (queue.length !== 0) {
-      let current = queue.at(0);
-      callback(current);
-      if (current.left) queue.push(current.left);
-      if (current.right) queue.push(current.right);
-      queue.shift();
+      let node = queue.shift();
+      callback(node);
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
     }
   }
+
+  preOrderForEach(callback, root = this.root) {
+    if (root == null) return;
+    callback(root);
+    this.preOrderForEach(callback,root.left);
+    this.preOrderForEach(callback,root.right);
+  }
+  inOrderForEach(callback) {}
+  postOrderForEach(callback) {}
   buildTree(array) {
     let sortedArrayToSet = new Set(array.sort((a, b) => a - b));
     let uniqueArray = [...sortedArrayToSet];
@@ -144,3 +150,6 @@ console.log(myTree.find(8));
 otherTree.levelOrderForEach((node) => {
   console.log(node.data);
 });
+console.log('__________-_-_-_-___-_');
+
+otherTree.preOrderForEach(node => console.log(node.data));

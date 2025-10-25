@@ -90,7 +90,12 @@ class Tree {
     this.preOrderForEach(callback,root.left);
     this.preOrderForEach(callback,root.right);
   }
-  inOrderForEach(callback) {}
+  inOrderForEach(callback, root = this.root) {
+     if (root == null) return;
+     this.inOrderForEach(callback,root.left);
+     callback(root);
+    this.inOrderForEach(callback,root.right);
+  }
   postOrderForEach(callback) {}
   buildTree(array) {
     let sortedArrayToSet = new Set(array.sort((a, b) => a - b));
@@ -153,3 +158,6 @@ otherTree.levelOrderForEach((node) => {
 console.log('__________-_-_-_-___-_');
 
 otherTree.preOrderForEach(node => console.log(node.data));
+console.log('__________-_-_-_-___-_');
+
+otherTree.inOrderForEach(node => console.log(node.data));

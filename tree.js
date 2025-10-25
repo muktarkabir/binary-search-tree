@@ -70,10 +70,14 @@ class Tree {
     return null;
   }
 
-  levelOrderForEach(callback) {
+  #checkForCallBack(callback) {
     if (!callback) throw new Error("Provide Callback function");
     if (typeof callback !== "function")
       throw new Error("Callback must be a function");
+  }
+
+  levelOrderForEach(callback) {
+    this.#checkForCallBack(callback);
     if (!this.root) return null;
     const queue = [this.root];
     while (queue.length !== 0) {
@@ -84,24 +88,38 @@ class Tree {
     }
   }
 
-  preOrderForEach(callback, root = this.root) {
-    if (root == null) return;
-    callback(root);
-    this.preOrderForEach(callback,root.left);
-    this.preOrderForEach(callback,root.right);
+  #preOrder(callback, node) {
+    if (node == null) return;
+    callback(node);
+    this.#preOrder(callback, node.left);
+    this.#preOrder(callback, node.right);
   }
-  inOrderForEach(callback, root = this.root) {
-     if (root == null) return;
-     this.inOrderForEach(callback,root.left);
-     callback(root);
-    this.inOrderForEach(callback,root.right);
+  #inOrder(callback, node) {
+    if (node == null) return;
+    this.#inOrder(callback, node.left);
+    callback(node);
+    this.#inOrder(callback, node.right);
   }
-  postOrderForEach(callback, root = this.root) {
-     if (root == null) return;
-     this.postOrderForEach(callback,root.left);
-     this.postOrderForEach(callback,root.right);
-     callback(root);
+  #postOrder(callback, node) {
+    if (node == null) return;
+    this.#postOrder(callback, node.left);
+    this.#postOrder(callback, node.right);
+    callback(node);
   }
+  preOrderForEach(callback) {
+    this.#checkForCallBack(callback);
+    this.#preOrder(callback, this.root);
+  }
+  inOrderForEach(callback) {
+    this.#checkForCallBack(callback);
+    this.#inOrder(callback, this.root);
+  }
+  postOrderForEach(callback) {
+    this.#checkForCallBack(callback);
+    this.#postOrder(callback, this.root);
+  }
+
+  height(value) {}
   buildTree(array) {
     let sortedArrayToSet = new Set(array.sort((a, b) => a - b));
     let uniqueArray = [...sortedArrayToSet];
@@ -160,11 +178,11 @@ console.log(myTree.find(8));
 otherTree.levelOrderForEach((node) => {
   console.log(node.data);
 });
-console.log('__________-_-_-_-___-_');
+console.log("__________-_-_-_-___-_");
 
-otherTree.preOrderForEach(node => console.log(node.data));
-console.log('__________-_-_-_-___-_');
+otherTree.preOrderForEach((node) => console.log(node.data));
+console.log("__________-_-_-_-___-_");
 
-otherTree.inOrderForEach(node => console.log(node.data));
-console.log('__________-_-_-_-___-_');
-otherTree.postOrderForEach(node => console.log(node.data));
+otherTree.inOrderForEach((node) => console.log(node.data));
+console.log("__________-_-_-_-___-_");
+otherTree.postOrderForEach((node) => console.log(node.data));

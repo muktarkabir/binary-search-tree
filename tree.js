@@ -62,7 +62,7 @@ class Tree {
     let parent = null;
     while (node) {
       if (node.data === value) {
-        return  { node, parent };;
+        return { node, parent };
       }
       parent = node;
       node = value > node.data ? node.right : node.left;
@@ -70,6 +70,22 @@ class Tree {
     return null;
   }
 
+  levelOrderForEach(callback) {
+    if (!callback) throw new Error("Provide Callback function");
+    if (typeof callback !== "function")
+      throw new Error("Callback must be a function");
+    let current = this.root;
+    if (!current) return null;
+    let queue = [];
+    queue.push(current);
+    while (queue.length !== 0) {
+      let current = queue.at(0);
+      callback(current);
+      if (current.left) queue.push(current.left);
+      if (current.right) queue.push(current.right);
+      queue.shift();
+    }
+  }
   buildTree(array) {
     let sortedArrayToSet = new Set(array.sort((a, b) => a - b));
     let uniqueArray = [...sortedArrayToSet];
@@ -125,3 +141,6 @@ myTree.printTree();
 // myTree.deleteItem(8);
 myTree.printTree();
 console.log(myTree.find(8));
+otherTree.levelOrderForEach((node) => {
+  console.log(node.data);
+});

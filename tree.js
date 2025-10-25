@@ -96,7 +96,12 @@ class Tree {
      callback(root);
     this.inOrderForEach(callback,root.right);
   }
-  postOrderForEach(callback) {}
+  postOrderForEach(callback, root = this.root) {
+     if (root == null) return;
+     this.postOrderForEach(callback,root.left);
+     this.postOrderForEach(callback,root.right);
+     callback(root);
+  }
   buildTree(array) {
     let sortedArrayToSet = new Set(array.sort((a, b) => a - b));
     let uniqueArray = [...sortedArrayToSet];
@@ -161,3 +166,5 @@ otherTree.preOrderForEach(node => console.log(node.data));
 console.log('__________-_-_-_-___-_');
 
 otherTree.inOrderForEach(node => console.log(node.data));
+console.log('__________-_-_-_-___-_');
+otherTree.postOrderForEach(node => console.log(node.data));

@@ -56,6 +56,20 @@ class Tree {
     }
   }
 
+  find(value) {
+    if (!this.root) return null;
+    let node = this.root;
+    let parent = null;
+    while (node) {
+      if (node.data === value) {
+        return  { node, parent };;
+      }
+      parent = node;
+      node = value > node.data ? node.right : node.left;
+    }
+    return null;
+  }
+
   buildTree(array) {
     let sortedArrayToSet = new Set(array.sort((a, b) => a - b));
     let uniqueArray = [...sortedArrayToSet];
@@ -108,5 +122,6 @@ otherTree.insert(otherTree.root, 59);
 myTree.printTree();
 myTree.deleteItem(67);
 myTree.printTree();
-myTree.deleteItem(8);
+// myTree.deleteItem(8);
 myTree.printTree();
+console.log(myTree.find(8));

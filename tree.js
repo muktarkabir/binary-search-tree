@@ -125,6 +125,13 @@ class Tree {
     let right = this.height(null, node.right);
     return 1 + Math.max(left, right);
   }
+
+  depth(value,node = this.root,level = 0){
+    if (node == null) return null;
+    if (node.data == value) return level;   
+    if (value > node.data) return this.depth(value,node.right,level +=1);
+    else return this.depth(value,node.left,level += 1);
+  }
   buildTree(array) {
     let sortedArrayToSet = new Set(array.sort((a, b) => a - b));
     let uniqueArray = [...sortedArrayToSet];
@@ -193,3 +200,5 @@ console.log("__________-_-_-_-___-_");
 // otherTree.postOrderForEach((node) => console.log(node.data));
 let height = myTree.height(8);
 console.log(height);
+console.log(myTree.depth(5));
+

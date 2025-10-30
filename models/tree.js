@@ -1,6 +1,6 @@
 import { Node } from "./node.js";
 
-class Tree {
+export class Tree {
   constructor(array) {
     this.array = array;
     this.root = this.buildTree(array);
@@ -147,6 +147,10 @@ class Tree {
     if (Math.abs(left - right) > 1) return false;
     return this.isBalanced(node.left) && this.isBalanced(node.right);
   }
+
+  reBalance(){
+
+  }
   buildTree(array) {
     let sortedArrayToSet = new Set(array.sort((a, b) => a - b));
     let uniqueArray = [...sortedArrayToSet];
@@ -163,14 +167,14 @@ class Tree {
 
     return sortedArrayToBSTRecur(uniqueArray, 0, uniqueArray.length - 1);
   }
-  printTree = () => this.prettyPrint(this.root);
+  printTree = () => this.#prettyPrint(this.root);
 
-  prettyPrint(node, prefix = "", isLeft = true) {
+  #prettyPrint(node, prefix = "", isLeft = true) {
     if (node === null) {
       return;
     }
     if (node.right !== null) {
-      this.prettyPrint(
+      this.#prettyPrint(
         node.right,
         `${prefix}${isLeft ? "│   " : "    "}`,
         false
@@ -178,43 +182,8 @@ class Tree {
     }
     console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
     if (node.left !== null) {
-      this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+      this.#prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
     }
   }
 }
 
-const myTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-
-const otherTree = new Tree([1, 2, 3, 4]);
-
-otherTree.insert(otherTree.root, 13);
-otherTree.insert(otherTree.root, 70);
-otherTree.insert(otherTree.root, 59);
-
-// otherTree.printTree();
-// myTree.printTree();
-// myTree.deleteItem(9);
-// myTree.deleteItem(4);
-// myTree.deleteItem(8);
-// myTree.printTree();
-// myTree.deleteItem(67);
-otherTree.printTree();
-// myTree.deleteItem(8);
-// myTree.printTree();
-// console.log(myTree.find(8));
-// otherTree.levelOrderForEach((node) => {
-//   console.log(node.data);
-// });
-// console.log("__________-_-_-_-___-_");
-
-// otherTree.preOrderForEach((node) => console.log(node.data));
-// console.log("__________-_-_-_-___-_");
-
-// otherTree.inOrderForEach((node) => console.log(node.data));
-console.log("__________-_-_-_-___-_");
-// otherTree.postOrderForEach((node) => console.log(node.data));
-let height = myTree.height(8);
-console.log(height);
-console.log(myTree.depth(5));
-
-console.log(otherTree.isBalanced());

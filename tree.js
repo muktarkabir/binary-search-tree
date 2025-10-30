@@ -119,12 +119,10 @@ class Tree {
     this.#postOrder(callback, this.root);
   }
 
-  height(value, node = this.find(value).node) {
+  height(value, node = this.find(value)?.node) {
     if (node == null) return -1;
-    if (node.isAleafNode()) return 0;
     let left = this.height(null, node.left);
     let right = this.height(null, node.right);
-    console.log("Answer", 1 + Math.max(left, right));
     return 1 + Math.max(left, right);
   }
   buildTree(array) {
@@ -193,4 +191,5 @@ myTree.printTree();
 // otherTree.inOrderForEach((node) => console.log(node.data));
 console.log("__________-_-_-_-___-_");
 // otherTree.postOrderForEach((node) => console.log(node.data));
-myTree.height(8);
+let height = myTree.height(8);
+console.log(height);

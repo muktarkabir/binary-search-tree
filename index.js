@@ -1,47 +1,43 @@
 import { Tree } from "./models/tree.js";
 import { randomNumbers } from "./utilities.js";
 
-const myTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+const arrayOfNumbers = randomNumbers();
+const myTree = new Tree(arrayOfNumbers);
+myTree.printTree();
+`
+│               ┌── 93
+│           ┌── 92
+│       ┌── 89
+│       │   │   ┌── 76
+│       │   └── 75
+│   ┌── 71
+│   │   │       ┌── 69
+│   │   │   ┌── 64
+│   │   └── 59
+│   │       └── 51
+└── 43
+    │           ┌── 41
+    │       ┌── 39
+    │   ┌── 30
+    │   │   │   ┌── 28
+    │   │   └── 23
+    └── 20
+        │       ┌── 19
+        │   ┌── 11
+        └── 9
+            └── 5
+`;
+myTree.isBalanced(); //true
+myTree.levelOrderForEach(node=> console.log(node.data));
+myTree.inOrderForEach(node=> console.log(node.data));
+myTree.preOrderForEach(node=> console.log(node.data));
+myTree.postOrderForEach(node=> console.log(node.data));
 
-const otherTree = new Tree([1, 2, 3, 4]);
+myTree.insert(200);
+myTree.insert(300);
+myTree.insert(400);
 
-otherTree.insert(13);
-otherTree.insert(70);
-otherTree.insert(59);
-
-// otherTree.printTree();
-// myTree.printTree();
-// myTree.deleteItem(9);
-// myTree.deleteItem(4);
-// myTree.deleteItem(8);
-// myTree.printTree();
-// myTree.deleteItem(67);
-otherTree.printTree();
-// myTree.deleteItem(8);
-// myTree.printTree();
-// console.log(myTree.find(8));
-// otherTree.levelOrderForEach((node) => {
-//   console.log(node.data);
-// });
-// console.log("__________-_-_-_-___-_");
-
-// otherTree.preOrderForEach((node) => console.log(node.data));
-// console.log("__________-_-_-_-___-_");
-
-// otherTree.inOrderForEach((node) => console.log(node.data));
-console.log("__________-_-_-_-___-_");
-// otherTree.postOrderForEach((node) => console.log(node.data));
-let height = myTree.height(8);
-// console.log(height);
-// console.log(myTree.depth(5));
-
-console.log(otherTree.isBalanced());
-otherTree.reBalance();
-otherTree.printTree();
-console.log(otherTree.isBalanced());
-
-
-
-let arrayyy = randomNumbers();
-
+myTree.isBalanced(); //false
+myTree.reBalance();
+myTree.isBalanced(); //true
 

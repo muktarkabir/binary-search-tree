@@ -5,16 +5,16 @@ export class Tree {
     this.array = array;
     this.root = this.buildTree(array);
   }
-  insert(root, value) {
-    if (root == null) {
+  insert(value,node = this.root) {
+    if (node == null) {
       return new Node(value);
     }
-    if (value < root.data) {
-      root.left = this.insert(root.left, value);
-    } else if (value > root.data) {
-      root.right = this.insert(root.right, value);
+    if (value < node.data) {
+      node.left = this.insert(value,node.left);
+    } else if (value > node.data) {
+      node.right = this.insert(value,node.right);
     }
-    return root;
+    return node;
   }
   deleteItem(value) {
     let previous = null;

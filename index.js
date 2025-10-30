@@ -4,9 +4,9 @@ const myTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 
 const otherTree = new Tree([1, 2, 3, 4]);
 
-otherTree.insert(otherTree.root, 13);
-otherTree.insert(otherTree.root, 70);
-otherTree.insert(otherTree.root, 59);
+otherTree.insert(13);
+otherTree.insert(70);
+otherTree.insert(59);
 
 // otherTree.printTree();
 // myTree.printTree();
@@ -31,7 +31,7 @@ otherTree.printTree();
 console.log("__________-_-_-_-___-_");
 // otherTree.postOrderForEach((node) => console.log(node.data));
 let height = myTree.height(8);
-console.log(height);
-console.log(myTree.depth(5));
+// console.log(height);
+// console.log(myTree.depth(5));
 
-console.log(otherTree.isBalanced());
+// console.log(otherTree.isBalanced());

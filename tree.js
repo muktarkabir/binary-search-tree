@@ -119,18 +119,33 @@ class Tree {
     this.#postOrder(callback, this.root);
   }
 
-  height(value, node = this.find(value)?.node) {
+  height(value) {
+    let node = this.find(value).node;
+    if (node == null) return null;
+    else return this.#height(node);
+  }
+
+  #height(node) {
     if (node == null) return -1;
-    let left = this.height(null, node.left);
-    let right = this.height(null, node.right);
+    let left = this.#height(node.left);
+    let right = this.#height(node.right);
     return 1 + Math.max(left, right);
   }
 
-  depth(value,node = this.root,level = 0){
+  depth(value, node = this.root, level = 0) {
     if (node == null) return null;
-    if (node.data == value) return level;   
-    if (value > node.data) return this.depth(value,node.right,level +=1);
-    else return this.depth(value,node.left,level += 1);
+    if (node.data == value) return level;
+    if (value > node.data) return this.depth(value, node.right, (level += 1));
+    else return this.depth(value, node.left, (level += 1));
+  }
+
+  isBalanced(node = this.root) {
+    if (node == null) return true;
+    let left = this.#height(node.left);
+    let right = this.#height(node.right);
+
+    if (Math.abs(left - right) > 1) return false;
+    return this.isBalanced(node.left) && this.isBalanced(node.right);
   }
   buildTree(array) {
     let sortedArrayToSet = new Set(array.sort((a, b) => a - b));
@@ -173,7 +188,7 @@ const myTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 const otherTree = new Tree([1, 2, 3, 4]);
 
 otherTree.insert(otherTree.root, 13);
-otherTree.insert(otherTree.root, 0);
+otherTree.insert(otherTree.root, 70);
 otherTree.insert(otherTree.root, 59);
 
 // otherTree.printTree();
@@ -183,7 +198,7 @@ otherTree.insert(otherTree.root, 59);
 // myTree.deleteItem(8);
 // myTree.printTree();
 // myTree.deleteItem(67);
-myTree.printTree();
+otherTree.printTree();
 // myTree.deleteItem(8);
 // myTree.printTree();
 // console.log(myTree.find(8));
@@ -202,3 +217,4 @@ let height = myTree.height(8);
 console.log(height);
 console.log(myTree.depth(5));
 
+console.log(otherTree.isBalanced());

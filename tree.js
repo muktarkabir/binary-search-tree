@@ -119,7 +119,14 @@ class Tree {
     this.#postOrder(callback, this.root);
   }
 
-  height(value) {}
+  height(value, node = this.find(value).node) {
+    if (node == null) return -1;
+    if (node.isAleafNode()) return 0;
+    let left = this.height(null, node.left);
+    let right = this.height(null, node.right);
+    console.log("Answer", 1 + Math.max(left, right));
+    return 1 + Math.max(left, right);
+  }
   buildTree(array) {
     let sortedArrayToSet = new Set(array.sort((a, b) => a - b));
     let uniqueArray = [...sortedArrayToSet];
@@ -169,20 +176,21 @@ otherTree.insert(otherTree.root, 59);
 // myTree.deleteItem(9);
 // myTree.deleteItem(4);
 // myTree.deleteItem(8);
-myTree.printTree();
-myTree.deleteItem(67);
+// myTree.printTree();
+// myTree.deleteItem(67);
 myTree.printTree();
 // myTree.deleteItem(8);
-myTree.printTree();
-console.log(myTree.find(8));
-otherTree.levelOrderForEach((node) => {
-  console.log(node.data);
-});
-console.log("__________-_-_-_-___-_");
+// myTree.printTree();
+// console.log(myTree.find(8));
+// otherTree.levelOrderForEach((node) => {
+//   console.log(node.data);
+// });
+// console.log("__________-_-_-_-___-_");
 
-otherTree.preOrderForEach((node) => console.log(node.data));
-console.log("__________-_-_-_-___-_");
+// otherTree.preOrderForEach((node) => console.log(node.data));
+// console.log("__________-_-_-_-___-_");
 
-otherTree.inOrderForEach((node) => console.log(node.data));
+// otherTree.inOrderForEach((node) => console.log(node.data));
 console.log("__________-_-_-_-___-_");
-otherTree.postOrderForEach((node) => console.log(node.data));
+// otherTree.postOrderForEach((node) => console.log(node.data));
+myTree.height(8);

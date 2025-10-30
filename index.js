@@ -1,4 +1,5 @@
 import { Tree } from "./models/tree.js";
+import { randomNumbers } from "./utilities.js";
 
 const myTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 
@@ -38,3 +39,9 @@ console.log(otherTree.isBalanced());
 otherTree.reBalance();
 otherTree.printTree();
 console.log(otherTree.isBalanced());
+
+
+
+let arrayyy = randomNumbers();
+
+

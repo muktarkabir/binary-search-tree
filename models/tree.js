@@ -149,6 +149,9 @@ export class Tree {
   }
 
   reBalance(){
+    let arr = [];
+    this.inOrderForEach(node=> arr.push(node.data));
+    this.root = this.buildTree(arr);
 
   }
   buildTree(array) {

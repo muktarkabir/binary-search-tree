@@ -34,4 +34,7 @@ let height = myTree.height(8);
 // console.log(height);
 // console.log(myTree.depth(5));
 
-// console.log(otherTree.isBalanced());
+console.log(otherTree.isBalanced());
+otherTree.reBalance();
+otherTree.printTree();
+console.log(otherTree.isBalanced());
